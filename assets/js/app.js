@@ -11,7 +11,7 @@ const margin = {
 
 //Define inner width for data in the whole svg
 const innerWidth = svgWidth - margin.left - margin.right;
-const innerHeight = svgHeight - margin.top - margin.bootom;
+const innerHeight = svgHeight - margin.top - margin.bottom;
 
 //Create svg wrapper
 const svg = d3.select("#scatter")
@@ -38,6 +38,27 @@ d3.csv("assets/data/data.csv").then(stateData => {
     });
 
     console.log(stateData);
+
+    //Create scale functions
+    const xScale = d3.scaleLinear()
+        .domain([0, d3.max(stateData, d => d.poverty)])
+        .range([0, innerWidth]);
+
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(stateData, d => d.smokes)])
+        .range([innerHeight, 0]);
+
+    //Create axis functions
+    const xAxis = d3.axisBottom(xScale);
+    const yAxis = d3.axisLeft(yScale);
+
+    //Append axis to chart
+    chartGroup.append("g")
+      .attr("transform", `translate(0, ${innerHeight})`)
+      .call(xAxis);
+
+    chartGroup.append("g")
+      .call(yAxis);
 
 }).catch(error => console.log(error));
 
