@@ -4,9 +4,9 @@ const svgHeight = 500;
 
 const margin = {
     top: 25,
-    bottom: 25, 
+    bottom: 65, 
     right: 25, 
-    left: 25
+    left: 50
 };
 
 //Define inner width for data in the whole svg
@@ -41,12 +41,14 @@ d3.csv("assets/data/data.csv").then(stateData => {
 
     //Create scale functions
     const xScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.poverty)])
-        .range([0, innerWidth]);
+        .domain([8, d3.max(stateData, d => d.poverty) +1])
+        .range([0, innerWidth])
+        .nice();
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.smokes)])
-        .range([innerHeight, 0]);
+        .domain([0, d3.max(stateData, d => d.smokes) +1])
+        .range([innerHeight, 0])
+        .nice();
 
     //Create axis functions
     const xAxis = d3.axisBottom(xScale);
@@ -59,6 +61,34 @@ d3.csv("assets/data/data.csv").then(stateData => {
 
     chartGroup.append("g")
       .call(yAxis);
+
+    const circleGroup = chartGroup.selectAll("circle")
+      .data(stateData)
+      .join("circle")
+      .attr("cx", d => xScale(d.poverty))
+      .attr("cy", d => yScale(d.smokes))
+      .attr("r", "15")
+      .attr("class", "stateCircle")
+
+    const textGroup = chartGroup2.selectAll("text")
+        .data(stateData)
+        .join("text")
+        .attr("x", d => xScale(d.poverty))
+        .attr("y", d => yScale(d.smokes)+5)
+        .text(d => d.abbr)
+        .attr("class", "stateText");
+
+       // Create axes labels
+    chartGroup.append("text")
+       .attr("transform", "rotate(-90)")
+       .attr("y", 0 - margin.left+ 1)
+       .attr("x", 0 - (innerHeight / 2) -90)
+       .attr("dy", "1em")
+       .text("Number of Billboard 100 Hits");
+ 
+     chartGroup.append("text")
+       .attr("transform", `translate(${(innerWidth / 2) -150}, ${innerHeight + margin.top + 30})`)
+       .text("Hair Metal Band Hair Length (inches)");
 
 }).catch(error => console.log(error));
 
