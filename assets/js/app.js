@@ -81,14 +81,14 @@ d3.csv("assets/data/data.csv").then(stateData => {
        // Create axes labels
     chartGroup.append("text")
        .attr("transform", "rotate(-90)")
-       .attr("y", 0 - margin.left+ 1)
-       .attr("x", 0 - (innerHeight / 2) -90)
+       .attr("y", 0 - margin.left)
+       .attr("x", 0 - (innerHeight / 2) -25)
        .attr("dy", "1em")
-       .text("Number of Billboard 100 Hits");
+       .text("Poverty Rate");
  
      chartGroup.append("text")
-       .attr("transform", `translate(${(innerWidth / 2) -150}, ${innerHeight + margin.top + 30})`)
-       .text("Hair Metal Band Hair Length (inches)");
+       .attr("transform", `translate(${(innerWidth / 2) -40}, ${innerHeight + margin.top + 30})`)
+       .text("Smoking Rate");
 
 }).catch(error => console.log(error));
 
