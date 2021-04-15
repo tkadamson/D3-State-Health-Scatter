@@ -46,7 +46,7 @@ d3.csv("assets/data/data.csv").then(stateData => {
         .nice();
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(stateData, d => d.smokes) +1])
+        .domain([8, d3.max(stateData, d => d.smokes) +1])
         .range([innerHeight, 0])
         .nice();
 
@@ -82,13 +82,13 @@ d3.csv("assets/data/data.csv").then(stateData => {
     chartGroup.append("text")
        .attr("transform", "rotate(-90)")
        .attr("y", 0 - margin.left)
-       .attr("x", 0 - (innerHeight / 2) -25)
+       .attr("x", 0 - (innerHeight / 2) -30)
        .attr("dy", "1em")
-       .text("Poverty Rate");
+       .text("Smoking Rate");
  
      chartGroup.append("text")
-       .attr("transform", `translate(${(innerWidth / 2) -40}, ${innerHeight + margin.top + 30})`)
-       .text("Smoking Rate");
+       .attr("transform", `translate(${(innerWidth / 2) -25}, ${innerHeight + margin.top + 30})`)
+       .text("Poverty Rate");
 
 }).catch(error => console.log(error));
 
