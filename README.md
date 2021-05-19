@@ -1,6 +1,10 @@
-# hw13-D3-world-health-data
+# D3-State-Health-Scatter
 
-## Solution Explanation | GRADE: -
+### Summary | GRADE: A
+
+For this project, I was given a csv with various health metrics by state. The task was to create a D3.js scatterplot of two different metrics with each point labeled with state abbreviations on the plot. I cxhose to work with poverty and smoking rates.
+
+### Project Writeup
 
 This scatterplot was generated using d3, using svgs correctly placed to demonstrate the correlation between poverty and smoking.
 
